@@ -9,7 +9,7 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>cipher-module</artifactId>
+    <artifactId>user-management-module</artifactId>
 
     <properties>
         <maven.compiler.source>22</maven.compiler.source>
