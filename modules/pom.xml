@@ -13,6 +13,10 @@
     <packaging>pom</packaging>
     <modules>
         <module>user-management-module</module>
+        <module>login-pass-auth-module</module>
+        <module>workshop-module</module>
+        <module>booking-module</module>
+        <module>service-module</module>
     </modules>
 
     <properties>

@@ -17,14 +17,19 @@
 		<module>modules</module>
 		<module>application</module>
 	</modules>
-    <scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
 	<properties>
-		<java.version>17</java.version>
+		<revision>1.0.1</revision>
+		<liquibase.core.version>4.18.0</liquibase.core.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<lombok.version>1.18.28</lombok.version>
+		<spring.boot.starter.mail.verison>3.1.5</spring.boot.starter.mail.verison>
+		<thymeleaf.spring6>3.1.2.RELEASE</thymeleaf.spring6>
+		<spring-boot-starter-security.version>3.2.4</spring-boot-starter-security.version>
+		<jjwt.version>0.9.1</jjwt.version>
+		<jaxb-api.version>2.3.0</jaxb-api.version>
+		<postgresql.version>42.7.3</postgresql.version>
 	</properties>
 
 	<dependencies>
@@ -37,6 +42,11 @@
 			<artifactId>lombok</artifactId>
 			<version>${lombok.version}</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>${postgresql.version}</version>
 		</dependency>
 	</dependencies>
 

@@ -8,12 +8,12 @@
         <artifactId>modules</artifactId>
         <version>${revision}</version>
     </parent>
-    <artifactId>user-management-module</artifactId>
+    <artifactId>login-pass-auth-module</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
     <modules>
-        <module>user-management-domain</module>
-        <module>user-management-infrastructure</module>
-        <module>user-management-rest</module>
+        <module>login-pass-auth-domain</module>
+        <module>login-pass-auth-infrastructure</module>
+        <module>login-pass-auth-rest</module>
     </modules>
 </project>

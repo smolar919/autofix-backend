@@ -5,15 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.kamilsmolarek.autofix</groupId>
-        <artifactId>modules</artifactId>
+        <artifactId>configuration</artifactId>
         <version>${revision}</version>
     </parent>
-    <artifactId>user-management-module</artifactId>
-    <version>${revision}</version>
-    <packaging>pom</packaging>
-    <modules>
-        <module>user-management-domain</module>
-        <module>user-management-infrastructure</module>
-        <module>user-management-rest</module>
-    </modules>
+    <artifactId>security</artifactId>
 </project>

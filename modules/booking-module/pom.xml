@@ -8,12 +8,12 @@
         <artifactId>modules</artifactId>
         <version>${revision}</version>
     </parent>
-    <artifactId>user-management-module</artifactId>
+    <artifactId>booking-module</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
     <modules>
-        <module>user-management-domain</module>
-        <module>user-management-infrastructure</module>
-        <module>user-management-rest</module>
+        <module>booking-domain</module>
+        <module>booking-infrastructure</module>
+        <module>booking-rest</module>
     </modules>
 </project>

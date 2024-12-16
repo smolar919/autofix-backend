@@ -8,13 +8,10 @@
         <artifactId>parent</artifactId>
         <version>${revision}</version>
     </parent>
-
+    <packaging>pom</packaging>
     <artifactId>configuration</artifactId>
-
-    <properties>
-        <maven.compiler.source>22</maven.compiler.source>
-        <maven.compiler.target>22</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
+    <version>${revision}</version>
+    <modules>
+        <module>security</module>
+    </modules>
 </project>

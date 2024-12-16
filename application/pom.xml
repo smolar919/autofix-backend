@@ -14,17 +14,34 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <groupId>com.kamilsmolarek.autofix</groupId>
+            <artifactId>user-management-domain</artifactId>
+            <version>${revision}</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>com.kamilsmolarek.autofix</groupId>
+            <artifactId>user-management-infrastructure</artifactId>
+            <version>${revision}</version>
         </dependency>
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <scope>runtime</scope>
+            <groupId>com.kamilsmolarek.autofix</groupId>
+            <artifactId>user-management-rest</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.kamilsmolarek.autofix</groupId>
+            <artifactId>login-pass-auth-domain</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.kamilsmolarek.autofix</groupId>
+            <artifactId>login-pass-auth-infrastructure</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.kamilsmolarek.autofix</groupId>
+            <artifactId>login-pass-auth-rest</artifactId>
+            <version>${revision}</version>
         </dependency>
     </dependencies>
 </project>
