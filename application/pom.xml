@@ -58,5 +58,20 @@
             <artifactId>workshop-rest</artifactId>
             <version>${revision}</version>
         </dependency>
+        <dependency>
+            <groupId>com.kamilsmolarek.autofix</groupId>
+            <artifactId>vehicle-domain</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.kamilsmolarek.autofix</groupId>
+            <artifactId>vehicle-infrastructure</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.kamilsmolarek.autofix</groupId>
+            <artifactId>vehicle-rest</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
 </project>
