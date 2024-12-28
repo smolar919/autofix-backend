@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: classpath:db/changelog/workshop/create-address-table.xml
+  - include:
+      file: classpath:db/changelog/workshop/create-workshop-table.xml
+  - include:
+      file: classpath:db/changelog/workshop/create-employee-table.xml
