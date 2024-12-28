@@ -43,5 +43,20 @@
             <artifactId>login-pass-auth-rest</artifactId>
             <version>${revision}</version>
         </dependency>
+        <dependency>
+            <groupId>com.kamilsmolarek.autofix</groupId>
+            <artifactId>workshop-domain</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.kamilsmolarek.autofix</groupId>
+            <artifactId>workshop-infrastructure</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.kamilsmolarek.autofix</groupId>
+            <artifactId>workshop-rest</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
 </project>
