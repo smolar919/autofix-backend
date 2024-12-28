@@ -10,7 +10,8 @@ public enum ErrorCode {
     UNKNOWN_ERROR("Something went wrong"),
     UNSUPPORTED_OPERATOR("Unsupported operator"),
     WORKSHOP_NOT_FOUND("Workshop not found."),
-    EMPLOYEE_NOT_FOUND("Employee not found");
+    EMPLOYEE_NOT_FOUND("Employee not found"),
+    VEHICLE_NOT_FOUND("Vehicle not found");
 
     ErrorCode(String message) {
         this.message = message;
