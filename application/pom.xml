@@ -73,5 +73,20 @@
             <artifactId>vehicle-rest</artifactId>
             <version>${revision}</version>
         </dependency>
+        <dependency>
+            <groupId>com.kamilsmolarek.autofix</groupId>
+            <artifactId>service-domain</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.kamilsmolarek.autofix</groupId>
+            <artifactId>service-infrastructure</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.kamilsmolarek.autofix</groupId>
+            <artifactId>service-rest</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
 </project>
