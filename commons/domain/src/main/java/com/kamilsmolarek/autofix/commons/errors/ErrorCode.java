@@ -12,7 +12,8 @@ public enum ErrorCode {
     WORKSHOP_NOT_FOUND("Workshop not found."),
     EMPLOYEE_NOT_FOUND("Employee not found"),
     VEHICLE_NOT_FOUND("Vehicle not found"),
-    SERVICE_NOT_FOUND("Service not found"),;
+    SERVICE_NOT_FOUND("Service not found"),
+    PAYMENT_NOT_FOUND("Payment not found"),;
 
     ErrorCode(String message) {
         this.message = message;

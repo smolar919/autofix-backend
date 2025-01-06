@@ -17,6 +17,8 @@
         <module>workshop-module</module>
         <module>booking-module</module>
         <module>service-module</module>
+        <module>vehicle-module</module>
+        <module>payment-module</module>
     </modules>
 
     <properties>

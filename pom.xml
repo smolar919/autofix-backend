@@ -30,6 +30,7 @@
 		<jjwt.version>0.9.1</jjwt.version>
 		<jaxb-api.version>2.3.0</jaxb-api.version>
 		<postgresql.version>42.7.3</postgresql.version>
+		<stripe.version>22.22.0</stripe.version>
 	</properties>
 
 	<dependencies>
@@ -47,6 +48,11 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>${postgresql.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.stripe</groupId>
+			<artifactId>stripe-java</artifactId>
+			<version>${stripe.version}</version>
 		</dependency>
 	</dependencies>
 

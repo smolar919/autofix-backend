@@ -27,3 +27,5 @@ app:
     sysAdminLastName: admin
     sysAdminEmail: admin@test.pl
     sysAdminPassword: password123
+stripe:
+    secretKey: sk_test_51QbfvaFQNTESLPVj754XHTMT53D0LSUxKfWyxIAtIDeaawWx3eZFb2Ib3JXFnh5fRaJNKg0auRptFAuqFZmXaCWI00Uq2GAffC
