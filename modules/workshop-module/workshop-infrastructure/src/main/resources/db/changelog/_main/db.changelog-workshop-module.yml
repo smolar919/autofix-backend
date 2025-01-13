@@ -5,3 +5,5 @@ databaseChangeLog:
       file: classpath:db/changelog/workshop/create-workshop-table.xml
   - include:
       file: classpath:db/changelog/workshop/create-employee-table.xml
+  - include:
+      file: classpath:db/changelog/workshop/create-time-slot-table.xml

@@ -18,19 +18,28 @@ public class WorkshopEntity {
     @Column(name = "id")
     private String id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id")
+    @JoinColumn(name = "address_id", nullable = false)
     private AddressEntity address;
 
     @OneToMany(mappedBy = "workshop", cascade = CascadeType.ALL)
     private List<EmployeeEntity> employees;
 
-    @Column(name = "owner_id")
+    @Column(name = "owner_id", nullable = false)
     private String ownerId;
 
-    @Column(name = "is_visible")
+    @Column(name = "is_visible", nullable = false)
     private boolean isVisible;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "service_ids")
+    private String serviceIds;
+
+    @Column(name = "opening_hours")
+    private String openingHours;
 }

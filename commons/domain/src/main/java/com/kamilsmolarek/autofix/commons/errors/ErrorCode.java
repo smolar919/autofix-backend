@@ -16,7 +16,8 @@ public enum ErrorCode {
     PAYMENT_NOT_FOUND("Payment not found"),
     BOOKING_NOT_FOUND("Booking not found"),
     USER_ALREADY_EMPLOYEE_OF_ANOTHER_WORKSHOP("User is already an employee of another workshop"),
-    EMAIL_ALREADY_IN_USE("Adres email jest już zajęty.");
+    EMAIL_ALREADY_IN_USE("Adres email jest już zajęty."),
+    TIME_SLOT_NOT_FOUND("Time slot not found"),;
 
     ErrorCode(String message) {
         this.message = message;

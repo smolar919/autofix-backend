@@ -16,4 +16,7 @@ public class Workshop {
     private Address address;
     private List<Employee> employees;
     private boolean isVisible;
+    private String description;
+    private List<String> serviceIds;
+    private String openingHours;
 }
