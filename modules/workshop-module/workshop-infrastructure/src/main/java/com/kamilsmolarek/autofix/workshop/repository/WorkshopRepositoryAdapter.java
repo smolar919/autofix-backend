@@ -23,8 +23,9 @@ public class WorkshopRepositoryAdapter implements WorkshopRepository {
 
     @Override
     public Workshop save(Workshop workshop) {
-        WorkshopEntity entity = repositoryJpa.save(WorkshopMapper.toEntity(workshop));
-        return WorkshopMapper.toWorkshop(entity);
+        WorkshopEntity entity = WorkshopMapper.toEntity(workshop);
+        WorkshopEntity savedEntity = repositoryJpa.save(entity);
+        return WorkshopMapper.toWorkshop(savedEntity);
     }
 
     @Override
@@ -41,12 +42,12 @@ public class WorkshopRepositoryAdapter implements WorkshopRepository {
     @Override
     public SearchResponse<Workshop> search(SearchForm form) {
         Specification<WorkshopEntity> specification = SearchSpecification.buildSpecification(form.getCriteria());
-        Page<WorkshopEntity> userPage = repositoryJpa.findAll(specification, SearchSpecification.getPageRequest(form));
+        Page<WorkshopEntity> workshopPage = repositoryJpa.findAll(specification, SearchSpecification.getPageRequest(form));
         return SearchResponse.<Workshop>builder()
-                .items(userPage.getContent().stream()
+                .items(workshopPage.getContent().stream()
                         .map(WorkshopMapper::toWorkshop)
                         .collect(Collectors.toList()))
-                .total(userPage.getTotalElements())
+                .total(workshopPage.getTotalElements())
                 .build();
     }
 }

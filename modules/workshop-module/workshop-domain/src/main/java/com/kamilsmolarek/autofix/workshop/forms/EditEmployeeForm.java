@@ -10,8 +10,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class EditEmployeeForm {
-    private String firstName;
-    private String lastName;
     private String position;
     private String phoneNumber;
     private String email;

@@ -13,7 +13,7 @@ public interface UserManagementService {
 
     SearchResponse<User> search(SearchForm form);
     User get(String id);
-    User save(@Valid CreateUserForm userRequest, String createdById);
+    User save(@Valid CreateUserForm userRequest);
     User saveSysAdminOnStartup(@Valid CreateUserForm userRequest);
     User update(@Valid EditUserForm userRequest);
 

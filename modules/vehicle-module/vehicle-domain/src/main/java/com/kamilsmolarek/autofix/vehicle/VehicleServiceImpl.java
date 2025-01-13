@@ -50,6 +50,12 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
+    public Vehicle get(String id) {
+        return vehicleRepository.findById(id)
+                .orElseThrow(() -> new ApplicationException(ErrorCode.VEHICLE_NOT_FOUND));
+    }
+
+    @Override
     public List<Vehicle> listByOwnerId(String ownerId) {
         return vehicleRepository.findByOwnerId(ownerId);
     }

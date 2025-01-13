@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
-public class EmployeeRepositoryAdapter implements EmployeeRepository{
+public class EmployeeRepositoryAdapter implements EmployeeRepository {
     private final EmployeeRepositoryJpa repositoryJpa;
     private final WorkshopRepositoryJpa workshopRepositoryJpa;
 
@@ -27,11 +27,14 @@ public class EmployeeRepositoryAdapter implements EmployeeRepository{
 
     @Override
     public Employee save(Employee employee) {
-        WorkshopEntity workshopEntity = workshopRepositoryJpa.getById(employee.getWorkshopId());
         EmployeeEntity employeeEntity = EmployeeMapper.toEntity(employee);
-        employeeEntity.setWorkshop(workshopEntity);
-        repositoryJpa.save(employeeEntity);
-        return EmployeeMapper.toEmployee(employeeEntity);
+        if (employee.getWorkshopId() != null) {
+            WorkshopRepositoryJpa workshopRepo = this.workshopRepositoryJpa;
+            workshopRepo.findById(employee.getWorkshopId())
+                    .ifPresent(employeeEntity::setWorkshop);
+        }
+        EmployeeEntity savedEntity = repositoryJpa.save(employeeEntity);
+        return EmployeeMapper.toEmployee(savedEntity);
     }
 
     @Override
@@ -48,6 +51,13 @@ public class EmployeeRepositoryAdapter implements EmployeeRepository{
     }
 
     @Override
+    public List<Employee> findByUserId(String userId) {
+        return repositoryJpa.findByUserId(userId).stream()
+                .map(EmployeeMapper::toEmployee)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public void deleteById(String id) {
         repositoryJpa.deleteById(id);
     }
@@ -55,12 +65,12 @@ public class EmployeeRepositoryAdapter implements EmployeeRepository{
     @Override
     public SearchResponse<Employee> search(SearchForm form) {
         Specification<EmployeeEntity> specification = SearchSpecification.buildSpecification(form.getCriteria());
-        Page<EmployeeEntity> userPage = repositoryJpa.findAll(specification, SearchSpecification.getPageRequest(form));
+        Page<EmployeeEntity> employeePage = repositoryJpa.findAll(specification, SearchSpecification.getPageRequest(form));
         return SearchResponse.<Employee>builder()
-                .items(userPage.getContent().stream()
+                .items(employeePage.getContent().stream()
                         .map(EmployeeMapper::toEmployee)
                         .collect(Collectors.toList()))
-                .total(userPage.getTotalElements())
+                .total(employeePage.getTotalElements())
                 .build();
     }
 }

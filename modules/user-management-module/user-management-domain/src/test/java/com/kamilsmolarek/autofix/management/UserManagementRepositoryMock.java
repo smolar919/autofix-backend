@@ -36,4 +36,9 @@ public class UserManagementRepositoryMock implements UserManagementRepository {
         mockDB.put(user.getId(), user);
         return user;
     }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return Optional.empty();
+    }
 }

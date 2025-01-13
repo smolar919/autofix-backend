@@ -1,9 +1,6 @@
 package com.kamilsmolarek.autofix.user.management;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
@@ -32,9 +29,6 @@ public class UserEntity {
     @Column(name = "created_on")
     private Instant createdOn;
 
-    @Column(name = "created_by_id")
-    private String createdById;
-
     @Column(name = "deleted_on")
     private Instant deletedOn;
 
@@ -44,15 +38,19 @@ public class UserEntity {
     @Column(name = "is_blocked")
     private boolean isBlocked;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
+    private Role role;
+
     public UserEntity(User user) {
         this.id = user.getId();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.email = user.getEmail();
-        this.createdById = user.getCreatedById();
         this.createdOn = user.getCreatedOn();
         this.deletedOn = user.getDeletedOn();
         this.deletedById = user.getDeletedById();
         this.isBlocked = user.isBlocked();
+        this.role = user.getRole();
     }
 }

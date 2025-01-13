@@ -4,6 +4,7 @@ import com.kamilsmolarek.autofix.commons.errors.ApplicationException;
 import com.kamilsmolarek.autofix.commons.errors.ErrorCode;
 import com.kamilsmolarek.autofix.commons.search.SearchForm;
 import com.kamilsmolarek.autofix.commons.search.SearchResponse;
+import com.kamilsmolarek.autofix.user.management.Role;
 import com.kamilsmolarek.autofix.user.management.User;
 import com.kamilsmolarek.autofix.user.management.forms.CreateUserForm;
 import com.kamilsmolarek.autofix.user.management.forms.EditUserForm;
@@ -37,17 +38,17 @@ public class UserManagementServiceImpl implements UserManagementService {
     }
 
     @Override
-    public User save(CreateUserForm userRequest, String createdById) {
+    public User save(CreateUserForm userRequest) {
         User user = User.builder()
                 .id(UUID.randomUUID().toString())
                 .firstName(userRequest.getFirstName())
                 .lastName(userRequest.getLastName())
                 .email(userRequest.getEmail())
                 .createdOn(Instant.now())
-                .createdById(createdById)
                 .deletedOn(null)
                 .deletedById(null)
                 .isBlocked(false)
+                .role(Role.CUSTOMER)
                 .build();
         return userManagementRepository.save(user);
     }
@@ -60,8 +61,8 @@ public class UserManagementServiceImpl implements UserManagementService {
                 .lastName(userRequest.getLastName())
                 .email(userRequest.getEmail())
                 .createdOn(Instant.now())
-                .createdById("SYSTEM")
                 .isBlocked(false)
+                .role(Role.ADMIN)
                 .build();
 
         return userManagementRepository.save(user);

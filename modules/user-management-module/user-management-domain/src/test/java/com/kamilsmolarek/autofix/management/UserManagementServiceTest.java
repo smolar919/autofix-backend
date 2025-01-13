@@ -1,6 +1,7 @@
 package com.kamilsmolarek.autofix.management;
 
 
+import com.kamilsmolarek.autofix.user.management.Role;
 import com.kamilsmolarek.autofix.user.management.User;
 import com.kamilsmolarek.autofix.user.management.forms.CreateUserForm;
 import com.kamilsmolarek.autofix.user.management.forms.EditUserForm;
@@ -25,7 +26,7 @@ public class UserManagementServiceTest {
 
     @Test
     void getTest() {
-        User userSaved = service.save(new CreateUserForm("Kacper", "Koncki", "test@test.pl"), "createdByTestId");
+        User userSaved = service.save(new CreateUserForm("Kacper", "Koncki", "test@test.pl"));
         User userFound = service.get(userSaved.getId());
         assertEquals(userSaved.getId(), userFound.getId());
         assertEquals(userFound.getFirstName(), "Kacper");
@@ -37,7 +38,7 @@ public class UserManagementServiceTest {
     void saveTest() throws InterruptedException {
         Instant currentDate = Instant.now();
         Thread.sleep(2);
-        User user = service.save(new CreateUserForm("Kacper", "Koncki", "test@test.pl"), "createdByTestId");
+        User user = service.save(new CreateUserForm("Kacper", "Koncki", "test@test.pl"));
         Thread.sleep(2);
         Instant dateAfterSave = Instant.now();
         assertNotNull(user.getId());
@@ -65,7 +66,7 @@ public class UserManagementServiceTest {
     void updateTest() throws InterruptedException {
         Instant currentDate = Instant.now();
         Thread.sleep(2);
-        User userSaved = service.save(new CreateUserForm("Kacper", "Koncki", "test@test.pl"), "createdByTestId");
+        User userSaved = service.save(new CreateUserForm("Kacper", "Koncki", "test@test.pl"));
         userSaved = service.update(new EditUserForm(userSaved.getId(), "Andrzej", "Kowalski", "test2@test.pl"));
         Thread.sleep(2);
         Instant dateAfterUpdate = Instant.now();
@@ -91,14 +92,14 @@ public class UserManagementServiceTest {
 
     @Test
     void blockTest() {
-        User user = service.save(new CreateUserForm("Kacper", "Koncki", "test@test.pl"), "createdByTestId");
+        User user = service.save(new CreateUserForm("Kacper", "Koncki", "test@test.pl"));
         service.block(user.getId());
         assertTrue(user.isBlocked());
     }
 
     @Test
     void unBlockTest() {
-        User user = service.save(new CreateUserForm("Kacper", "Koncki", "test@test.pl"), "createdByTestId");
+        User user = service.save(new CreateUserForm("Kacper", "Koncki", "test@test.pl"));
         service.block(user.getId());
         service.unBlock(user.getId());
         assertFalse(user.isBlocked());
@@ -106,7 +107,7 @@ public class UserManagementServiceTest {
 
     @Test
     void deleteTest() {
-        User user = service.save(new CreateUserForm("Kacper", "Koncki", "test@test.pl"), "createdByTestId");
+        User user = service.save(new CreateUserForm("Kacper", "Koncki", "test@test.pl"));
         service.delete(user.getId(), "deletedByTestId");
         assertNotNull(user.getDeletedOn());
         assertNotNull(user.getDeletedById());

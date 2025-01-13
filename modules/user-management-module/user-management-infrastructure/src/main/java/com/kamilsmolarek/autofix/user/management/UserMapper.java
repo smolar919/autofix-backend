@@ -9,10 +9,10 @@ public class UserMapper {
                 .lastName(userEntity.getLastName())
                 .email(userEntity.getEmail())
                 .createdOn(userEntity.getCreatedOn())
-                .createdById(userEntity.getCreatedById())
                 .deletedOn(userEntity.getDeletedOn())
                 .deletedById(userEntity.getDeletedById())
                 .isBlocked(userEntity.isBlocked())
+                .role(userEntity.getRole())
                 .build();
     }
 }
