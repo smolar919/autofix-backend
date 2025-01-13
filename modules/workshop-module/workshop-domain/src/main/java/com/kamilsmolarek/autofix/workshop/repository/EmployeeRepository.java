@@ -12,4 +12,5 @@ public interface EmployeeRepository {
     List<Employee> findByWorkshopId(String workshopId);
     void deleteById(String id);
     SearchResponse<Employee> search(SearchForm form);
+    List<Employee> findByUserId(String userId);
 }

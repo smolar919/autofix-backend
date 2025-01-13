@@ -7,6 +7,7 @@ import com.kamilsmolarek.autofix.login.pass.auth.forms.*;
 import com.kamilsmolarek.autofix.login.pass.auth.repository.AuthorizationRepository;
 import com.kamilsmolarek.autofix.user.management.User;
 import com.kamilsmolarek.autofix.user.management.forms.CreateUserForm;
+import com.kamilsmolarek.autofix.user.management.repository.UserManagementRepository;
 import com.kamilsmolarek.autofix.user.management.service.UserManagementService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -30,14 +32,16 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     private final UserManagementService userManagementService;
 
     private final AuthPassUserProps props;
+    private final UserManagementRepository userRepository;
 
 
-    public AuthorizationServiceImpl(AuthorizationRepository authorizationRepository, PasswordEncoder passwordEncoder, TokenProvider tokenProvider, UserManagementService userManagementService, AuthPassUserProps props) {
+    public AuthorizationServiceImpl(AuthorizationRepository authorizationRepository, PasswordEncoder passwordEncoder, TokenProvider tokenProvider, UserManagementService userManagementService, AuthPassUserProps props, UserManagementRepository userRepository) {
         this.authorizationRepository = authorizationRepository;
         this.passwordEncoder = passwordEncoder;
         this.tokenProvider = tokenProvider;
         this.userManagementService = userManagementService;
         this.props = props;
+        this.userRepository = userRepository;
     }
 
     private AuthPassUser getByEmailOrThrowAuthPassUser(String email) {
@@ -68,9 +72,11 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     }
 
     @Override
-    public void createUser(CreateUserWithPasswordForm createUserRequest, String createdById) {
-
-        User user = userManagementService.save(createUserRequest, createdById);
+    public void createUser(CreateUserWithPasswordForm createUserRequest) {
+        if (userRepository.findByEmail(createUserRequest.getEmail()).isPresent()) {
+            throw new ApplicationException(ErrorCode.EMAIL_ALREADY_IN_USE);
+        }
+        User user = userManagementService.save(createUserRequest);
 
         AuthPassUser userAuth = AuthPassUser.builder()
                 .id(user.getId())

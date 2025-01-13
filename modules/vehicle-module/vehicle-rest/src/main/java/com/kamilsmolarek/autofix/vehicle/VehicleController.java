@@ -19,6 +19,11 @@ public class VehicleController {
         return vehicleService.create(form);
     }
 
+    @GetMapping("/{id}")
+    public Vehicle getVehicle(@PathVariable String id) {
+        return vehicleService.get(id);
+    }
+
     @PutMapping("/{id}")
     public Vehicle editVehicle(@PathVariable String id, @RequestBody EditVehicleForm form) {
         return vehicleService.edit(id, form);

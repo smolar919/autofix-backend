@@ -15,6 +15,9 @@ public class EmployeeEntity {
     @Column(name = "id")
     private String id;
 
+    @Column(name = "user_id")
+    private String userId;
+
     @Column(name = "first_name")
     private String firstName;
 

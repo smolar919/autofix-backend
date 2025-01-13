@@ -9,11 +9,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CreateEmployeeForm {
-    private String firstName;
-    private String lastName;
+public class AddExistingEmployeeForm {
+    private String email;
     private String position;
     private String phoneNumber;
-    private String email;
     private String workshopId;
 }

@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface EmployeeRepositoryJpa extends JpaRepository<EmployeeEntity, String>, JpaSpecificationExecutor<EmployeeEntity> {
     List<EmployeeEntity> findByWorkshopId(String workshopId);
+    List<EmployeeEntity> findByUserId(String userId);
 }

@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface JpaUserManagementRepository extends JpaRepository<UserEntity, String>, JpaSpecificationExecutor<UserEntity> {
 
     Optional<UserEntity> findByIdAndDeletedOnIsNull(String id);
+
+    Optional<UserEntity> findByEmail(String email);
 }

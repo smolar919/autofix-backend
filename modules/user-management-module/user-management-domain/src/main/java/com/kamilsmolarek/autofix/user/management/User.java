@@ -15,8 +15,8 @@ public class User {
     private String lastName;
     private String email;
     private Instant createdOn;
-    private String createdById;
     private Instant deletedOn;
     private String deletedById;
     private boolean isBlocked;
+    private Role role;
 }

@@ -9,6 +9,7 @@ import lombok.*;
 @Builder
 public class Employee {
     private String id;
+    private String userId;
     private String firstName;
     private String lastName;
     private String position;

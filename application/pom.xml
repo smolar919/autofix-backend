@@ -103,5 +103,20 @@
             <artifactId>payment-rest</artifactId>
             <version>${revision}</version>
         </dependency>
+        <dependency>
+            <groupId>com.kamilsmolarek.autofix</groupId>
+            <artifactId>booking-domain</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.kamilsmolarek.autofix</groupId>
+            <artifactId>booking-infrastructure</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.kamilsmolarek.autofix</groupId>
+            <artifactId>booking-rest</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
 </project>

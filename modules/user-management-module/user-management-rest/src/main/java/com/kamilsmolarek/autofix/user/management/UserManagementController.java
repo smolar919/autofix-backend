@@ -32,7 +32,7 @@ public class UserManagementController {
 
     @PostMapping("/save")
     public User save(@RequestBody CreateUserForm createUserForm) {
-        return userManagementService.save(createUserForm, loggedUser.getUserId());
+        return userManagementService.save(createUserForm);
     }
 
     @PutMapping("/update")

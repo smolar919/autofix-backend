@@ -1,12 +1,17 @@
 package com.kamilsmolarek.autofix.login.pass.auth;
 
 import com.kamilsmolarek.autofix.commons.LoggedUser;
+import com.kamilsmolarek.autofix.commons.errors.ApplicationException;
 import com.kamilsmolarek.autofix.login.pass.auth.forms.CreateUserWithPasswordForm;
 import com.kamilsmolarek.autofix.login.pass.auth.forms.LoginForm;
 import com.kamilsmolarek.autofix.login.pass.auth.forms.ResetPasswordConfirmForm;
 import com.kamilsmolarek.autofix.login.pass.auth.forms.ResetPasswordForm;
 import com.kamilsmolarek.autofix.login.pass.auth.service.AuthorizationService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
@@ -27,7 +32,7 @@ public class LoginPassAuthController {
 
     @PostMapping("/register")
     public void createUser(@RequestBody CreateUserWithPasswordForm form) {
-        authorizationService.createUser(form, loggedUser.getUserId());
+            authorizationService.createUser(form);
     }
 
     @PostMapping("/reset-password-request")

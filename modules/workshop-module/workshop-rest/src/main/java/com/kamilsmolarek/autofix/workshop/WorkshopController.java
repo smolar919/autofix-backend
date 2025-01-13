@@ -17,11 +17,6 @@ public class WorkshopController {
         this.workshopService = workshopService;
     }
 
-    @PostMapping("/search")
-    public SearchResponse<Workshop> search(@RequestBody SearchForm form) {
-        return workshopService.search(form);
-    }
-
     @PostMapping
     public Workshop create(@RequestBody CreateWorkshopForm form) {
         return workshopService.create(form);
@@ -35,5 +30,15 @@ public class WorkshopController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable String id) {
         workshopService.delete(id);
+    }
+
+    @PostMapping("/search")
+    public SearchResponse<Workshop> search(@RequestBody SearchForm form) {
+        return workshopService.search(form);
+    }
+
+    @GetMapping("/{id}")
+    public Workshop get(@PathVariable String id) {
+        return workshopService.get(id);
     }
 }

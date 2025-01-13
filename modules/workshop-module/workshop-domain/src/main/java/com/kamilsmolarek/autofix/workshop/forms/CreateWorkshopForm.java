@@ -16,4 +16,6 @@ public class CreateWorkshopForm {
     private String postalCode;
     private String voivodeship;
     private String country;
+    private String ownerId;
+    private String ownerPhoneNumber;
 }

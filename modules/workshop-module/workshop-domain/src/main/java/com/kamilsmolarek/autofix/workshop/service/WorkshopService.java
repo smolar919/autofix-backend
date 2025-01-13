@@ -11,4 +11,5 @@ public interface WorkshopService {
     Workshop edit(String id, EditWorkshopForm form);
     void delete(String id);
     SearchResponse<Workshop> search(SearchForm form);
+    Workshop get(String id);
 }

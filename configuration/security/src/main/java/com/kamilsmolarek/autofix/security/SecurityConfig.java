@@ -27,10 +27,11 @@ public class SecurityConfig {
 
     private final UserDetailsService userDetailsService;
     private final JwtAuthorizationFilter jwtAuthorizationFilter;
+
     private final SecurityProps props;
 
-    public SecurityConfig(UserDetailsService userDetailsService, JwtAuthorizationFilter jwtAuthorizationFilter, SecurityProps props) {
-        this.userDetailsService = userDetailsService;
+    public SecurityConfig(UserDetailsService customUserDetailsService, JwtAuthorizationFilter jwtAuthorizationFilter, SecurityProps props) {
+        this.userDetailsService = customUserDetailsService;
         this.jwtAuthorizationFilter = jwtAuthorizationFilter;
         this.props = props;
     }
@@ -53,7 +54,7 @@ public class SecurityConfig {
 
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorizeHttpRequest) -> authorizeHttpRequest
-                        .requestMatchers(props.getSecurityFilterPath()).permitAll()
+                        .requestMatchers("/auth/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))

@@ -15,11 +15,9 @@ public class WorkshopMapper {
                 .id(workshopEntity.getId())
                 .name(workshopEntity.getName())
                 .address(AddressMapper.toAddress(workshopEntity.getAddress()))
-                .employees(workshopEntity.getEmployees() != null
-                        ? workshopEntity.getEmployees().stream()
-                        .map(EmployeeMapper::toEmployee)
-                        .collect(Collectors.toList())
-                        : null)
+                .employees(null)
+                .ownerId(workshopEntity.getOwnerId())
+                .isVisible(workshopEntity.isVisible())
                 .build();
     }
 
@@ -32,11 +30,9 @@ public class WorkshopMapper {
                 .id(workshop.getId())
                 .name(workshop.getName())
                 .address(AddressMapper.toEntity(workshop.getAddress()))
-                .employees(workshop.getEmployees() != null
-                        ? workshop.getEmployees().stream()
-                        .map(EmployeeMapper::toEntity)
-                        .collect(Collectors.toList())
-                        : null)
+                .employees(null)
+                .ownerId(workshop.getOwnerId())
+                .isVisible(workshop.isVisible())
                 .build();
     }
 }

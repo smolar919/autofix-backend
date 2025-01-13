@@ -11,7 +11,9 @@ import java.util.List;
 @Builder
 public class Workshop {
     private String id;
+    private String ownerId;
     private String name;
     private Address address;
     private List<Employee> employees;
+    private boolean isVisible;
 }

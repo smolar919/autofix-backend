@@ -27,4 +27,10 @@ public class WorkshopEntity {
 
     @OneToMany(mappedBy = "workshop", cascade = CascadeType.ALL)
     private List<EmployeeEntity> employees;
+
+    @Column(name = "owner_id")
+    private String ownerId;
+
+    @Column(name = "is_visible")
+    private boolean isVisible;
 }

@@ -16,9 +16,6 @@
             <column name="created_on" type="datetime">
                 <constraints nullable="false"/>
             </column>
-            <column name="created_by_id" type="varchar(255)">
-                <constraints nullable="true"/>
-            </column>
             <column name="deleted_on" type="datetime">
                 <constraints nullable="true"/>
             </column>
@@ -30,6 +27,9 @@
             </column>
             <column name="deleted_by_id" type="varchar(255)">
                 <constraints nullable="true"/>
+            </column>
+            <column name="role" type="VARCHAR(50)" defaultValue="CUSTOMER">
+                <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>

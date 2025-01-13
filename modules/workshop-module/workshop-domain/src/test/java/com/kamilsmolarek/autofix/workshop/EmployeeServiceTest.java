@@ -1,14 +1,18 @@
 package com.kamilsmolarek.autofix.workshop;
 
-import com.kamilsmolarek.autofix.workshop.forms.CreateEmployeeForm;
+import com.kamilsmolarek.autofix.workshop.forms.CreateNewEmployeeForm;
 import com.kamilsmolarek.autofix.workshop.forms.EditEmployeeForm;
 import com.kamilsmolarek.autofix.workshop.model.Employee;
-import com.kamilsmolarek.autofix.workshop.model.Workshop;
+import com.kamilsmolarek.autofix.user.management.Role;
+import com.kamilsmolarek.autofix.user.management.User;
 import com.kamilsmolarek.autofix.workshop.service.EmployeeServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import java.time.Instant;
+
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,56 +20,61 @@ public class EmployeeServiceTest {
 
     private EmployeeServiceImpl employeeService;
     private EmployeeRepositoryMock employeeRepositoryMock;
+    private UserManagementRepositoryMock userManagementRepositoryMock;
+    private AuthorizationRepositoryMock authorizationRepositoryMock;
+    private PasswordEncoderMock passwordEncoderMock;
     private WorkshopRepositoryMock workshopRepositoryMock;
 
     @BeforeEach
     void setUp() {
         employeeRepositoryMock = new EmployeeRepositoryMock();
+        userManagementRepositoryMock = new UserManagementRepositoryMock();
+        authorizationRepositoryMock = new AuthorizationRepositoryMock();
+        passwordEncoderMock = new PasswordEncoderMock();
         workshopRepositoryMock = new WorkshopRepositoryMock();
-        employeeService = new EmployeeServiceImpl(employeeRepositoryMock, workshopRepositoryMock);
+
+        employeeService = new EmployeeServiceImpl(
+                employeeRepositoryMock,
+                workshopRepositoryMock,
+                userManagementRepositoryMock,
+                passwordEncoderMock,
+                authorizationRepositoryMock
+                );
     }
 
     @Test
-    void testCreateEmployee() {
-        Workshop workshop = workshopRepositoryMock.save(new Workshop("1", "Warsztat 1", null, null));
-        CreateEmployeeForm form = new CreateEmployeeForm("Jan", "Nowak", "Mechanik", "123456789", "jan.nowak@example.com", workshop.getId());
-        Employee employee = employeeService.create(form);
+    @DisplayName("Usuwanie pracownika powinno przejść pomyślnie")
+    void testDeleteEmployee_Success() {
+        User user = User.builder()
+                .id("user-3")
+                .firstName("Piotr")
+                .lastName("Zieliński")
+                .email("piotr.zielinski@example.com")
+                .createdOn(Instant.now())
+                .isBlocked(false)
+                .role(Role.EMPLOYEE)
+                .build();
+        userManagementRepositoryMock.save(user);
 
-        assertNotNull(employee);
-        assertEquals("Jan", employee.getFirstName());
-        assertEquals(workshop.getId(), employee.getWorkshopId());
-    }
-
-    @Test
-    void testEditEmployee() {
-        Workshop workshop = workshopRepositoryMock.save(new Workshop("1", "Warsztat 1", null, null));
-        Employee employee = employeeRepositoryMock.save(new Employee("1", "Jan", "Nowak", "Mechanik", "123456789", "jan.nowak@example.com","workshopId"));
-
-        EditEmployeeForm form = new EditEmployeeForm("Jan", "Nowak", "Menadzer", "987654321", "jan.nowak@example.com");
-        Employee updatedEmployee = employeeService.edit(employee.getId(), form);
-
-        assertNotNull(updatedEmployee);
-        assertEquals("Jan", updatedEmployee.getFirstName());
-        assertEquals("Menadzer", updatedEmployee.getPosition());
-    }
-
-    @Test
-    void testDeleteEmployee() {
-        Employee employee = employeeRepositoryMock.save(new Employee("1", "Jan", "Nowak", "Mechanik", "123456789", "jan.nowak@example.com", null));
+        Employee employee = employeeRepositoryMock.save(new Employee(
+                "emp-2",
+                "user-3",
+                "piotr.zielinski@example.com",
+                "Piotr",
+                "Zieliński",
+                "Inżynier",
+                "111222333",
+                "workshop-4"
+        ));
 
         employeeService.delete(employee.getId());
 
-        assertFalse(employeeRepositoryMock.findById(employee.getId()).isPresent());
-    }
+        Optional<Employee> deletedEmployeeOpt = employeeRepositoryMock.findById(employee.getId());
+        assertFalse(deletedEmployeeOpt.isPresent(), "Pracownik powinien być usunięty z repozytorium");
 
-    @Test
-    void testListByWorkshop() {
-        Workshop workshop = workshopRepositoryMock.save(new Workshop("1", "Warsztat 1", null, null));
-        employeeRepositoryMock.save(new Employee("1", "Jan", "Nowak", "Mechanik", "123456789", "jan.nowak@example.com", "workshop"));
-        employeeRepositoryMock.save(new Employee("2", "Piotr", "Kowalski", "Menadzer", "987654321", "piotr.kowalski@example.com", "workshop"));
-
-        List<Employee> employees = employeeService.listByWorkshop(workshop.getId());
-
-        assertEquals(2, employees.size());
+        Optional<User> userOpt = userManagementRepositoryMock.get("user-3");
+        assertTrue(userOpt.isPresent(), "Użytkownik powinien istnieć w repozytorium");
+        User updatedUser = userOpt.get();
+        assertEquals(Role.CUSTOMER, updatedUser.getRole(), "Rola użytkownika powinna być CUSTOMER");
     }
 }

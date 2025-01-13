@@ -50,4 +50,9 @@ public class UserManagementRepositoryAdapter implements UserManagementRepository
         UserEntity userEntity = userManagementRepository.save(new UserEntity(user));
         return UserMapper.toUser(userEntity);
     }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return userManagementRepository.findByEmail(email).map(UserMapper::toUser);
+    }
 }

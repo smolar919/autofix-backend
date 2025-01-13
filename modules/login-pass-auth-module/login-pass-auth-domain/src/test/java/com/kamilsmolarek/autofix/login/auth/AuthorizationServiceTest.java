@@ -25,9 +25,6 @@ public class AuthorizationServiceTest {
     UserManagementRepository userManagementRepository = new UserManagementRepositoryMock();
     UserManagementService userManagementService = new UserManagementServiceImpl(userManagementRepository);
     AuthPassUserProps props = new AuthPassUserPropsMock();
-
-
-
     AuthorizationService service = new AuthorizationServiceImpl(repository, encoder, provider, userManagementService, props);
 
     private final ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
@@ -50,7 +47,7 @@ public class AuthorizationServiceTest {
         form.setLastName("Koncki");
         form.setEmail("test@test.pl");
         form.setPassword("password123");
-        service.createUser(form, "createdByTestId");
+        service.createUser(form);
     }
     @Test
     void successfulLogInTest() {
