@@ -30,8 +30,7 @@ public class WorkshopRepositoryAdapter implements WorkshopRepository {
 
     @Override
     public Optional<Workshop> findById(String id) {
-        Optional<WorkshopEntity> entity = repositoryJpa.findById(id);
-        return entity.map(WorkshopMapper::toWorkshop);
+        return repositoryJpa.findById(id).map(WorkshopMapper::toWorkshop);
     }
 
     @Override

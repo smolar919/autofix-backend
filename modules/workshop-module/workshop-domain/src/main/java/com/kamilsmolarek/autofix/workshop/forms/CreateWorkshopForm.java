@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -18,4 +20,7 @@ public class CreateWorkshopForm {
     private String country;
     private String ownerId;
     private String ownerPhoneNumber;
+    private String description;
+    private String openingHours;
+    private List<String> serviceIds;
 }
