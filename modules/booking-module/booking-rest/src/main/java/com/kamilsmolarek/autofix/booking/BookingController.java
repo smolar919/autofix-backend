@@ -1,8 +1,10 @@
 package com.kamilsmolarek.autofix.booking;
 
+import com.kamilsmolarek.autofix.commons.search.SearchForm;
+import com.kamilsmolarek.autofix.commons.search.SearchResponse;
+import com.kamilsmolarek.autofix.workshop.model.Workshop;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -64,5 +66,10 @@ public class BookingController {
             @RequestParam BookingStatus newStatus) {
         bookingService.updateBookingStatus(bookingId, newStatus);
         return bookingService.findBookingById(bookingId);
+    }
+
+    @PostMapping("/search")
+    public SearchResponse<Booking> search(@RequestBody SearchForm form) {
+        return bookingService.search(form);
     }
 }

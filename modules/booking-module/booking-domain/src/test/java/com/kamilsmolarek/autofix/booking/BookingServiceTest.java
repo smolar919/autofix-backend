@@ -26,7 +26,7 @@ public class BookingServiceTest {
                 .vehicleId("vehicle1")
                 .serviceIds(List.of("service1"))
                 .employeeId("employee1")
-                .bookingDate(LocalDateTime.now())
+                .timeSlotId(LocalDateTime.now())
                 .build();
 
         Booking booking = bookingService.createBooking(form);
@@ -46,7 +46,7 @@ public class BookingServiceTest {
                 .vehicleId("vehicle1")
                 .serviceIds(List.of("service1"))
                 .employeeId("employee1")
-                .bookingDate(LocalDateTime.now())
+                .timeSlotId(LocalDateTime.now())
                 .build();
 
         Booking booking = bookingService.createBooking(form);
@@ -56,7 +56,7 @@ public class BookingServiceTest {
 
         Booking updatedBooking = bookingService.updateBooking(editForm);
 
-        assertEquals(editForm.getNewDate(), updatedBooking.getBookingDate());
+        assertEquals(editForm.getNewDate(), updatedBooking.getTimeSlotId());
     }
 
     @Test
@@ -67,7 +67,7 @@ public class BookingServiceTest {
                 .vehicleId("vehicle1")
                 .serviceIds(List.of("service1"))
                 .employeeId("employee1")
-                .bookingDate(LocalDateTime.now())
+                .timeSlotId(LocalDateTime.now())
                 .build();
 
         Booking booking = bookingService.createBooking(form);
@@ -88,7 +88,7 @@ public class BookingServiceTest {
                 .vehicleId("vehicle1")
                 .serviceIds(List.of("service1"))
                 .employeeId("employee1")
-                .bookingDate(LocalDateTime.now())
+                .timeSlotId(LocalDateTime.now())
                 .build();
 
         Booking booking = bookingService.createBooking(form);
@@ -108,7 +108,7 @@ public class BookingServiceTest {
                 .vehicleId("vehicle1")
                 .serviceIds(List.of("service1"))
                 .employeeId("employee1")
-                .bookingDate(LocalDateTime.now())
+                .timeSlotId(LocalDateTime.now())
                 .build();
 
         bookingService.createBooking(form);
@@ -127,7 +127,7 @@ public class BookingServiceTest {
                 .vehicleId("vehicle1")
                 .serviceIds(List.of("service1"))
                 .employeeId("employee1")
-                .bookingDate(LocalDateTime.now())
+                .timeSlotId(LocalDateTime.now())
                 .build();
 
         bookingService.createBooking(form);
@@ -146,7 +146,7 @@ public class BookingServiceTest {
                 .vehicleId("vehicle1")
                 .serviceIds(List.of("service1"))
                 .employeeId("employee1")
-                .bookingDate(LocalDateTime.now())
+                .timeSlotId(LocalDateTime.now())
                 .build();
 
         bookingService.createBooking(form);
@@ -165,7 +165,7 @@ public class BookingServiceTest {
                 .vehicleId("vehicle1")
                 .serviceIds(List.of("service1"))
                 .employeeId("employee1")
-                .bookingDate(LocalDateTime.now())
+                .timeSlotId(LocalDateTime.now())
                 .build();
 
         bookingService.createBooking(form);
