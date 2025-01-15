@@ -17,6 +17,10 @@ public class Booking {
     private String vehicleId;
     private List<String> serviceIds;
     private String employeeId;
-    private LocalDateTime bookingDate;
+    private String timeSlotId;
+    private LocalDateTime submissionDate;
+    private LocalDateTime completionDate;
     private BookingStatus status;
+    private String faultDescription;
+    private String workDescription;
 }

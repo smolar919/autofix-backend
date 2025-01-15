@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <changeSet author="Kamil Smolarek" id="create-booking-table">
+    <changeSet id="create-booking-table" author="Kamil Smolarek">
         <createTable tableName="booking">
             <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
@@ -22,12 +22,16 @@
             <column name="employee_id" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="booking_date" type="timestamp">
+            <column name="time_slot_id" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="submission_date" type="timestamp"/>
+            <column name="completion_date" type="timestamp"/>
             <column name="status" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
+            <column name="fault_description" type="varchar(1024)"/>
+            <column name="work_description" type="varchar(1024)"/>
         </createTable>
 
         <createTable tableName="booking_service_ids">
@@ -46,7 +50,5 @@
                 referencedColumnNames="id"
                 constraintName="fk_booking_service_ids_booking"
                 onDelete="CASCADE"/>
-
     </changeSet>
-
 </databaseChangeLog>

@@ -2,8 +2,11 @@ package com.kamilsmolarek.autofix.booking;
 
 import com.kamilsmolarek.autofix.commons.errors.ApplicationException;
 import com.kamilsmolarek.autofix.commons.errors.ErrorCode;
+import com.kamilsmolarek.autofix.commons.search.SearchForm;
+import com.kamilsmolarek.autofix.commons.search.SearchResponse;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,14 +22,16 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public Booking createBooking(CreateBookingForm form) {
         Booking booking = Booking.builder()
-                .bookingDate(form.getBookingDate())
                 .id(UUID.randomUUID().toString())
-                .employeeId(form.getEmployeeId())
-                .serviceIds(form.getServiceIds())
-                .status(BookingStatus.PENDING)
+                .workshopId(form.getWorkshopId())
                 .userId(form.getUserId())
                 .vehicleId(form.getVehicleId())
-                .workshopId(form.getWorkshopId())
+                .serviceIds(form.getServiceIds())
+                .employeeId(form.getEmployeeId())
+                .timeSlotId(form.getTimeSlotId())
+                .submissionDate(LocalDateTime.now()) // zakładamy, że submissionDate jest równa bookingDate przy tworzeniu
+                .status(BookingStatus.PENDING)
+                .faultDescription(form.getFaultDescription())
                 .build();
         return bookingRepository.save(booking);
     }
@@ -34,17 +39,18 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public Booking updateBooking(EditBookingForm form) {
         Booking booking = bookingRepository.findById(form.getBookingId());
-        if(booking == null) {
+        if (booking == null) {
             throw new ApplicationException(ErrorCode.BOOKING_NOT_FOUND);
         }
-        booking.setBookingDate(form.getNewDate());
+        booking.setCompletionDate(form.getNewCompletionDate());
+        booking.setWorkDescription(form.getWorkDescription());
         return bookingRepository.save(booking);
     }
 
     @Override
     public void cancelBooking(String bookingId) {
         Booking booking = bookingRepository.findById(bookingId);
-        if(booking == null) {
+        if (booking == null) {
             throw new ApplicationException(ErrorCode.BOOKING_NOT_FOUND);
         }
         booking.setStatus(BookingStatus.CANCELLED);
@@ -54,7 +60,7 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public Booking findBookingById(String bookingId) {
         Booking booking = bookingRepository.findById(bookingId);
-        if(booking == null) {
+        if (booking == null) {
             throw new ApplicationException(ErrorCode.BOOKING_NOT_FOUND);
         }
         return booking;
@@ -83,10 +89,15 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public void updateBookingStatus(String bookingId, BookingStatus newStatus) {
         Booking booking = bookingRepository.findById(bookingId);
-//        if(booking == null) {
-//            throw new ApplicationException(ErrorCode.BOOKING_NOT_FOUND);
-//        }
+        if (booking == null) {
+            throw new ApplicationException(ErrorCode.BOOKING_NOT_FOUND);
+        }
         booking.setStatus(newStatus);
         bookingRepository.save(booking);
+    }
+
+    @Override
+    public SearchResponse<Booking> search(SearchForm form) {
+        return bookingRepository.search(form);
     }
 }

@@ -50,6 +50,8 @@ public class WorkshopServiceImpl implements WorkshopService {
                 .employees(new ArrayList<>())
                 .ownerId(form.getOwnerId())
                 .isVisible(true)// dopiero po platnosciach zostanie zmienione
+                .description(form.getDescription())
+                .openingHours(form.getOpeningHours())
                 .build();
 
         // Zapis warsztatu

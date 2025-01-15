@@ -3,7 +3,6 @@ package com.kamilsmolarek.autofix.booking;
 import java.util.ArrayList;
 
 public class BookingMapper {
-
     public static BookingEntity toEntity(Booking booking) {
         if (booking == null) {
             return null;
@@ -15,25 +14,32 @@ public class BookingMapper {
                 .vehicleId(booking.getVehicleId())
                 .serviceIds(booking.getServiceIds())
                 .employeeId(booking.getEmployeeId())
-                .bookingDate(booking.getBookingDate())
+                .timeSlotId(booking.getTimeSlotId())
+                .submissionDate(booking.getSubmissionDate())
+                .completionDate(booking.getCompletionDate())
                 .status(booking.getStatus())
+                .faultDescription(booking.getFaultDescription())
+                .workDescription(booking.getWorkDescription())
                 .build();
     }
 
-    public static Booking toBooking(BookingEntity bookingEntity) {
-        if (bookingEntity == null) {
+    public static Booking toBooking(BookingEntity entity) {
+        if (entity == null) {
             return null;
         }
         return Booking.builder()
-                .id(bookingEntity.getId())
-                .workshopId(bookingEntity.getWorkshopId())
-                .userId(bookingEntity.getUserId())
-                .vehicleId(bookingEntity.getVehicleId())
-                .serviceIds(new ArrayList<>(bookingEntity.getServiceIds()))
-                .employeeId(bookingEntity.getEmployeeId())
-                .bookingDate(bookingEntity.getBookingDate())
-                .status(bookingEntity.getStatus())
+                .id(entity.getId())
+                .workshopId(entity.getWorkshopId())
+                .userId(entity.getUserId())
+                .vehicleId(entity.getVehicleId())
+                .serviceIds(new ArrayList<>(entity.getServiceIds()))
+                .employeeId(entity.getEmployeeId())
+                .timeSlotId(entity.getTimeSlotId())
+                .submissionDate(entity.getSubmissionDate())
+                .completionDate(entity.getCompletionDate())
+                .status(entity.getStatus())
+                .faultDescription(entity.getFaultDescription())
+                .workDescription(entity.getWorkDescription())
                 .build();
     }
 }
-
