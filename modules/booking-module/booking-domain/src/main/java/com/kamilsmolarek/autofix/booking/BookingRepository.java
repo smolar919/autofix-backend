@@ -12,6 +12,5 @@ public interface BookingRepository {
     List<Booking> findAllByWorkshopId(String workshopId);
     List<Booking> findAllByEmployeeId(String employeeId);
     List<Booking> findAllByVehicleId(String vehicleId);
-
     SearchResponse<Booking> search(SearchForm form);
 }

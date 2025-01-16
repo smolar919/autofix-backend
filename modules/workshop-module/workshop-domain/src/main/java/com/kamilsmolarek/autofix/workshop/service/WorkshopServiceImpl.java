@@ -54,18 +54,14 @@ public class WorkshopServiceImpl implements WorkshopService {
                 .openingHours(form.getOpeningHours())
                 .build();
 
-        // Zapis warsztatu
         workshopRepository.save(workshop);
 
-        // Znalezienie właściciela
         User owner = userManagementRepository.get(form.getOwnerId())
                 .orElseThrow(() -> new ApplicationException(ErrorCode.USER_NOT_FOUND));
 
-        // Zmiana roli na WORKSHOP_OWNER
         owner.setRole(Role.PROVIDER);
         userManagementRepository.save(owner);
 
-        // Dodanie właściciela jako pracownika warsztatu
         Employee ownerEmployee = Employee.builder()
                 .id(UUID.randomUUID().toString())
                 .userId(owner.getId())
@@ -103,15 +99,12 @@ public class WorkshopServiceImpl implements WorkshopService {
     public void delete(String id) {
         Workshop workshop = getOrThrow(id);
 
-        // Znalezienie właściciela warsztatu
         User owner = userManagementRepository.get(workshop.getOwnerId())
                 .orElseThrow(() -> new ApplicationException(ErrorCode.USER_NOT_FOUND));
 
-        // Zmiana roli właściciela na CUSTOMER
         owner.setRole(Role.CUSTOMER);
         userManagementRepository.save(owner);
 
-        // Usunięcie pracowników warsztatu
         List<Employee> employees = employeeRepository.findByWorkshopId(workshop.getId());
         for (Employee employee : employees) {
             User employeeUser = userManagementRepository.get(employee.getUserId())
@@ -121,7 +114,6 @@ public class WorkshopServiceImpl implements WorkshopService {
             employeeRepository.deleteById(employee.getId());
         }
 
-        // Usunięcie warsztatu
         workshopRepository.deleteById(workshop.getId());
     }
 
