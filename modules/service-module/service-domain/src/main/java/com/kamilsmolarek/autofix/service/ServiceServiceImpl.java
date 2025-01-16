@@ -50,4 +50,10 @@ public class ServiceServiceImpl implements ServiceService {
     public List<ServiceDTO> listByWorkshopId(String workshopId) {
         return repository.findByWorkshopId(workshopId);
     }
+
+    @Override
+    public ServiceDTO get(String id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new ApplicationException(ErrorCode.SERVICE_NOT_FOUND));
+    }
 }

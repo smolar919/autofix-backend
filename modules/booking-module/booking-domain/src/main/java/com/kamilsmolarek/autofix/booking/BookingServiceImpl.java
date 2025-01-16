@@ -44,6 +44,7 @@ public class BookingServiceImpl implements BookingService {
         }
         booking.setCompletionDate(form.getNewCompletionDate());
         booking.setWorkDescription(form.getWorkDescription());
+        booking.setStatus(BookingStatus.COMPLETED);
         return bookingRepository.save(booking);
     }
 

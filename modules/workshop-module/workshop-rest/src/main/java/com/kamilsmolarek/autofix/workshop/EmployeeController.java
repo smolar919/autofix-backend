@@ -49,4 +49,9 @@ public class EmployeeController {
     public SearchResponse<Employee> search(@RequestBody SearchForm form) {
         return employeeService.search(form);
     }
+
+    @GetMapping("/{id}")
+    public Employee getEmployee(@PathVariable String id) {
+        return employeeService.getEmployee(id);
+    }
 }

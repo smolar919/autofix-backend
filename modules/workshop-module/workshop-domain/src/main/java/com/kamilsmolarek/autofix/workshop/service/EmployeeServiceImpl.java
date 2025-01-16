@@ -165,6 +165,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.search(form);
     }
 
+    @Override
+    public Employee getEmployee(String id) {
+        return getOrThrow(id);
+    }
+
     private Employee getOrThrow(String id) {
         return employeeRepository.findById(id)
                 .orElseThrow(() -> new ApplicationException(ErrorCode.EMPLOYEE_NOT_FOUND));
