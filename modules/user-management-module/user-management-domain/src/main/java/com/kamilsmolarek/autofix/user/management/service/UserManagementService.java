@@ -16,7 +16,6 @@ public interface UserManagementService {
     User save(@Valid CreateUserForm userRequest);
     User saveSysAdminOnStartup(@Valid CreateUserForm userRequest);
     User update(@Valid EditUserForm userRequest);
-
     User block(String id);
     User unBlock(String id);
     void delete(String id, String deletedById);

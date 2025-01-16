@@ -16,6 +16,5 @@ public interface EmployeeService {
     void delete(String id);
     List<Employee> listByWorkshop(String workshopId);
     SearchResponse<Employee> search(SearchForm form);
-
     Employee getEmployee(String id);
 }

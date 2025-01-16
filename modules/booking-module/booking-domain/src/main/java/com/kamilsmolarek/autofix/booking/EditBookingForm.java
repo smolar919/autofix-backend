@@ -11,6 +11,6 @@ import java.time.LocalDateTime;
 @Builder
 public class EditBookingForm {
     private String bookingId;
-    private LocalDateTime newCompletionDate;  // Data zakończenia rezerwacji
-    private String workDescription;           // Opis wykonanych prac
+    private LocalDateTime newCompletionDate;
+    private String workDescription;
 }

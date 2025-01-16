@@ -42,14 +42,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee createNew(CreateNewEmployeeForm form) {
-        // Znalezienie warsztatu
         Workshop workshop = workshopRepository.findById(form.getWorkshopId())
                 .orElseThrow(() -> new ApplicationException(ErrorCode.WORKSHOP_NOT_FOUND));
 
-        // Generowanie hasła, jeśli nie podano
         String generatedPassword = form.getPassword() != null ? form.getPassword() : generateRandomPassword();
 
-        // Tworzenie nowego użytkownika
         User user = User.builder()
                 .id(UUID.randomUUID().toString())
                 .firstName(form.getFirstName())
@@ -70,38 +67,30 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         authorizationRepository.saveAuthPassUser(authPassUser);
 
-        // Wysłanie hasła do użytkownika (implementacja zależna od potrzeb)
         sendPasswordToUserEmail(user.getEmail(), generatedPassword);
 
-        // Tworzenie pracownika
         return saveEmployee(user, form.getPosition(), form.getPhoneNumber(), form.getWorkshopId());
     }
 
     @Override
     public Employee addExisting(AddExistingEmployeeForm form) {
-        // Znalezienie warsztatu
         Workshop workshop = workshopRepository.findById(form.getWorkshopId())
                 .orElseThrow(() -> new ApplicationException(ErrorCode.WORKSHOP_NOT_FOUND));
 
-        // Znalezienie istniejącego użytkownika po emailu
         User user = userManagementRepository.findByEmail(form.getEmail())
                 .orElseThrow(() -> new ApplicationException(ErrorCode.USER_NOT_FOUND));
 
-        // Sprawdzenie, czy użytkownik nie jest już pracownikiem innego warsztatu
         if (user.getRole() == Role.PROVIDER && isEmployeeOfAnotherWorkshop(user.getId(), workshop.getId())) {
             throw new ApplicationException(ErrorCode.USER_ALREADY_EMPLOYEE_OF_ANOTHER_WORKSHOP);
         }
 
-        // Sprawdzenie, czy użytkownik jest zablokowany
         if (user.isBlocked()) {
             throw new ApplicationException(ErrorCode.USER_IS_BLOCKED);
         }
 
-        // Przypisanie roli EMPLOYEE
         user.setRole(Role.PROVIDER);
         userManagementRepository.save(user);
 
-        // Tworzenie pracownika
         return saveEmployee(user, form.getPosition(), form.getPhoneNumber(), form.getWorkshopId());
     }
 
@@ -131,8 +120,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     private void sendPasswordToUserEmail(String email, String password) {
-        // Implementacja wysyłki e-maila z hasłem
-        // Możesz użyć np. Spring Email lub innego rozwiązania do wysyłania wiadomości e-mail
         System.out.printf("Wysłano e-mail z hasłem do użytkownika: %s. Hasło: %s%n", email, password);
     }
 

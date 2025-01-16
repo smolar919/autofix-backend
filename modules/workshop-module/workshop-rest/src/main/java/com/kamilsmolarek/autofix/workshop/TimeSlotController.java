@@ -22,13 +22,11 @@ public class TimeSlotController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public TimeSlot createTimeSlot(@PathVariable String workshopId, @RequestBody CreateTimeSlotForm form) {
-        // opcjonalnie sprawdź, czy workshopId z path jest zgodne z form
         return timeSlotService.createTimeSlot(form);
     }
 
     @PutMapping("/{timeSlotId}")
     public TimeSlot updateTimeSlot(@PathVariable String workshopId, @PathVariable String timeSlotId, @RequestBody EditTimeSlotForm form) {
-        // Upewnij się, że form.id jest zgodne z timeSlotId, lub ustaw je
         form.setId(timeSlotId);
         return timeSlotService.updateTimeSlot(form);
     }
