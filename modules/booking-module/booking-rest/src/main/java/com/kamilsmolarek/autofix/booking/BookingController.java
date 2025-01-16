@@ -24,13 +24,11 @@ public class BookingController {
     }
 
     @PutMapping("/{bookingId}")
-    public Booking updateBooking(@PathVariable String bookingId, @RequestBody EditBookingForm form) {
-        form.setBookingId(bookingId);
+    public Booking updateBooking(@RequestBody EditBookingForm form) {
         return bookingService.updateBooking(form);
     }
 
     @DeleteMapping("/{bookingId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void cancelBooking(@PathVariable String bookingId) {
         bookingService.cancelBooking(bookingId);
     }
@@ -61,11 +59,10 @@ public class BookingController {
     }
 
     @PutMapping("/{bookingId}/status")
-    public Booking updateBookingStatus(
+    public void updateBookingStatus(
             @PathVariable String bookingId,
             @RequestParam BookingStatus newStatus) {
         bookingService.updateBookingStatus(bookingId, newStatus);
-        return bookingService.findBookingById(bookingId);
     }
 
     @PostMapping("/search")

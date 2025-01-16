@@ -33,4 +33,9 @@ public class ServiceController {
     public List<ServiceDTO> listServicesByWorkshopId(@PathVariable String workshopId) {
         return serviceService.listByWorkshopId(workshopId);
     }
+
+    @GetMapping("/{id}")
+    public ServiceDTO getService(@PathVariable String id) {
+        return serviceService.get(id);
+    }
 }

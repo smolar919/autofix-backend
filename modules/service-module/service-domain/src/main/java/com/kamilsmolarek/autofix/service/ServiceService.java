@@ -11,4 +11,6 @@ public interface ServiceService {
     void delete(String id);
 
     List<ServiceDTO> listByWorkshopId(String workshopId);
+
+    ServiceDTO get(String id);
 }
