@@ -1,6 +1,8 @@
 package com.kamilsmolarek.autofix.workshop.mapper;
 
+import com.kamilsmolarek.autofix.workshop.entity.OpeningHoursEntity;
 import com.kamilsmolarek.autofix.workshop.entity.WorkshopEntity;
+import com.kamilsmolarek.autofix.workshop.model.OpeningHours;
 import com.kamilsmolarek.autofix.workshop.model.Workshop;
 
 import java.util.Arrays;
@@ -16,6 +18,13 @@ public class WorkshopMapper {
         List<String> serviceIds = entity.getServiceIds() != null && !entity.getServiceIds().isEmpty()
                 ? Arrays.asList(entity.getServiceIds().split(","))
                 : Collections.emptyList();
+
+        List<OpeningHours> openingHours = entity.getOpeningHours() != null && !entity.getOpeningHours().isEmpty()
+                ? entity.getOpeningHours().stream()
+                .map(OpeningHoursMapper::toDomain)
+                .collect(Collectors.toList())
+                : Collections.emptyList();
+
         return Workshop.builder()
                 .id(entity.getId())
                 .name(entity.getName())
@@ -25,7 +34,7 @@ public class WorkshopMapper {
                 .isVisible(entity.isVisible())
                 .description(entity.getDescription())
                 .serviceIds(serviceIds)
-                .openingHours(entity.getOpeningHours())
+                .openingHours(openingHours)
                 .build();
     }
 
@@ -33,7 +42,14 @@ public class WorkshopMapper {
         String serviceIds = (workshop.getServiceIds() != null && !workshop.getServiceIds().isEmpty())
                 ? workshop.getServiceIds().stream().collect(Collectors.joining(","))
                 : "";
-        return WorkshopEntity.builder()
+
+        List<OpeningHoursEntity> openingHoursEntities = (workshop.getOpeningHours() != null && !workshop.getOpeningHours().isEmpty())
+                ? workshop.getOpeningHours().stream()
+                .map(OpeningHoursMapper::toEntity)
+                .collect(Collectors.toList())
+                : Collections.emptyList();
+
+        WorkshopEntity workshopEntity = WorkshopEntity.builder()
                 .id(workshop.getId())
                 .name(workshop.getName())
                 .address(AddressMapper.toEntity(workshop.getAddress()))
@@ -42,8 +58,15 @@ public class WorkshopMapper {
                 .isVisible(workshop.isVisible())
                 .description(workshop.getDescription())
                 .serviceIds(serviceIds)
-                .openingHours(workshop.getOpeningHours())
+                .openingHours(openingHoursEntities)
                 .build();
+
+        if (openingHoursEntities != null) {
+            openingHoursEntities.forEach(oh -> oh.setWorkshop(workshopEntity));
+        }
+
+        return workshopEntity;
     }
+
 }
 

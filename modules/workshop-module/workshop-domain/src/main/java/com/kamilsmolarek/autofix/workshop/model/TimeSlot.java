@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 public class TimeSlot {
     private String id;
     private String workshopId;
-    private String employeeId;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
     private TimeSlotStatus status;

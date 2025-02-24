@@ -1,5 +1,6 @@
 package com.kamilsmolarek.autofix.workshop.forms;
 
+import com.kamilsmolarek.autofix.workshop.model.OpeningHours;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,6 @@ public class EditWorkshopForm {
     private String voivodeship;
     private String country;
     private String description;
-    private String openingHours;
+    private List<OpeningHours> openingHours;
     private List<String> serviceIds;
 }

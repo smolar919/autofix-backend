@@ -11,7 +11,6 @@ public class TimeSlotMapper {
         entity.setStartDateTime(domain.getStartDateTime());
         entity.setEndDateTime(domain.getEndDateTime());
         entity.setStatus(domain.getStatus());
-        entity.setEmployeeId(domain.getEmployeeId());
         return entity;
     }
 
@@ -22,7 +21,6 @@ public class TimeSlotMapper {
         domain.setStartDateTime(entity.getStartDateTime());
         domain.setEndDateTime(entity.getEndDateTime());
         domain.setStatus(entity.getStatus());
-        domain.setEmployeeId(entity.getEmployeeId());
         return domain;
     }
 }

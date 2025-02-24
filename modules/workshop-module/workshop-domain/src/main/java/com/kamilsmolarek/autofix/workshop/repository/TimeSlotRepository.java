@@ -9,6 +9,5 @@ public interface TimeSlotRepository {
     TimeSlot save(TimeSlot timeSlot);
     Optional<TimeSlot> findById(String id);
     List<TimeSlot> findByWorkshopId(String workshopId);
-    List<TimeSlot> findByWorkshopIdAndEmployeeId(String workshopId, String employeeId);
     void deleteById(String id);
 }

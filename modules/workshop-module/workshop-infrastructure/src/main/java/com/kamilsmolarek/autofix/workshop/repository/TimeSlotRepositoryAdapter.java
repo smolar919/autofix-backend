@@ -36,14 +36,6 @@ public class TimeSlotRepositoryAdapter implements TimeSlotRepository {
     }
 
     @Override
-    public List<TimeSlot> findByWorkshopIdAndEmployeeId(String workshopId, String employeeId) {
-        return repositoryJpa.findByWorkshopIdAndEmployeeId(workshopId, employeeId)
-                .stream()
-                .map(TimeSlotMapper::toDomain)
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public void deleteById(String id) {
         repositoryJpa.deleteById(id);
     }

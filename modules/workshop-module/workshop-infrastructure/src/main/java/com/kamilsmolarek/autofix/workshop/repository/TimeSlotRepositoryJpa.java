@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface TimeSlotRepositoryJpa extends JpaRepository<TimeSlotEntity, String> {
     List<TimeSlotEntity> findByWorkshopId(String workshopId);
-    List<TimeSlotEntity> findByWorkshopIdAndEmployeeId(String workshopId, String employeeId);
 }
