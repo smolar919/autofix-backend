@@ -44,15 +44,19 @@ public class WorkshopServiceImpl implements WorkshopService {
                 .build();
 
         Workshop workshop = Workshop.builder()
+                .id(UUID.randomUUID().toString())
                 .name(form.getName())
                 .address(address)
-                .id(UUID.randomUUID().toString())
                 .employees(new ArrayList<>())
                 .ownerId(form.getOwnerId())
-                .isVisible(true)// dopiero po platnosciach zostanie zmienione
+                .isVisible(true) // widoczność ustawiana początkowo na true, ewentualnie po płatnościach zmieniana
                 .description(form.getDescription())
                 .openingHours(form.getOpeningHours())
                 .build();
+
+        if (workshop.getOpeningHours() != null) {
+            workshop.getOpeningHours().forEach(oh -> oh.setWorkshop(workshop));
+        }
 
         workshopRepository.save(workshop);
 
@@ -78,6 +82,7 @@ public class WorkshopServiceImpl implements WorkshopService {
         return workshop;
     }
 
+
     @Override
     public Workshop edit(String id, EditWorkshopForm form) {
         Workshop workshop = getOrThrow(id);
@@ -92,8 +97,14 @@ public class WorkshopServiceImpl implements WorkshopService {
         workshop.setName(form.getName());
         workshop.setAddress(address);
 
+        workshop.setOpeningHours(form.getOpeningHours());
+        if (workshop.getOpeningHours() != null) {
+            workshop.getOpeningHours().forEach(oh -> oh.setWorkshop(workshop));
+        }
+
         return workshopRepository.save(workshop);
     }
+
 
     @Override
     public void delete(String id) {

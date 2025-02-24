@@ -11,6 +11,5 @@ public interface TimeSlotService {
     TimeSlot updateTimeSlot(EditTimeSlotForm form);
     void deleteTimeSlot(String timeSlotId);
     List<TimeSlot> getTimeSlots(String workshopId);
-    List<TimeSlot> getTimeSlotsByEmployee(String workshopId, String employeeId);
     TimeSlot getTimeSlot(String timeSlotId);
 }

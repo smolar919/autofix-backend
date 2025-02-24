@@ -9,3 +9,5 @@ databaseChangeLog:
       file: classpath:db/changelog/workshop/create-time-slot-table.xml
   - include:
       file: classpath:db/changelog/workshop/create-workshop-image-table.xml
+  - include:
+      file: classpath:db/changelog/workshop/create-opening-hours-table.xml

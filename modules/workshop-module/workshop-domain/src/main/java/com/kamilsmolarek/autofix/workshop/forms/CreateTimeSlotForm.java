@@ -14,5 +14,4 @@ public class CreateTimeSlotForm {
     private String workshopId;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
-    private String employeeId;
 }

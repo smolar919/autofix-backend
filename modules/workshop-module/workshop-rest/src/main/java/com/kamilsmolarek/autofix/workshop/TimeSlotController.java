@@ -33,20 +33,17 @@ public class TimeSlotController {
 
     @DeleteMapping("/{timeSlotId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteTimeSlot(@PathVariable String workshopId, @PathVariable String timeSlotId) {
+    public void deleteTimeSlot(@PathVariable String timeSlotId) {
         timeSlotService.deleteTimeSlot(timeSlotId);
     }
 
     @GetMapping
-    public List<TimeSlot> getTimeSlots(@PathVariable String workshopId, @RequestParam(value = "employeeId", required = false) String employeeId) {
-        if (employeeId != null && !employeeId.isEmpty()) {
-            return timeSlotService.getTimeSlotsByEmployee(workshopId, employeeId);
-        }
+    public List<TimeSlot> getTimeSlots(@PathVariable String workshopId){
         return timeSlotService.getTimeSlots(workshopId);
     }
 
     @GetMapping("/{timeSlotId}")
-    public TimeSlot getTimeSlot(@PathVariable String workshopId, @PathVariable String timeSlotId) {
+    public TimeSlot getTimeSlot(@PathVariable String timeSlotId) {
         return timeSlotService.getTimeSlot(timeSlotId);
     }
 }

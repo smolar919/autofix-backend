@@ -29,7 +29,4 @@ public class TimeSlotEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private TimeSlotStatus status;
-
-    @Column(name = "employee_id")
-    private String employeeId;
 }

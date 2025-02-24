@@ -28,7 +28,6 @@ public class TimeSlotServiceImpl implements TimeSlotService {
         TimeSlot timeSlot = new TimeSlot(
                 UUID.randomUUID().toString(),
                 form.getWorkshopId(),
-                form.getEmployeeId(),
                 form.getStartDateTime(),
                 form.getEndDateTime(),
                 TimeSlotStatus.AVAILABLE
@@ -43,7 +42,6 @@ public class TimeSlotServiceImpl implements TimeSlotService {
         timeSlot.setStartDateTime(form.getStartDateTime());
         timeSlot.setEndDateTime(form.getEndDateTime());
         timeSlot.setStatus(form.getStatus());
-        timeSlot.setEmployeeId(form.getEmployeeId());
         return timeSlotRepository.save(timeSlot);
     }
 
@@ -55,11 +53,6 @@ public class TimeSlotServiceImpl implements TimeSlotService {
     @Override
     public List<TimeSlot> getTimeSlots(String workshopId) {
         return timeSlotRepository.findByWorkshopId(workshopId);
-    }
-
-    @Override
-    public List<TimeSlot> getTimeSlotsByEmployee(String workshopId, String employeeId) {
-        return timeSlotRepository.findByWorkshopIdAndEmployeeId(workshopId, employeeId);
     }
 
     @Override

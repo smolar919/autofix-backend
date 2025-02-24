@@ -1,5 +1,6 @@
 package com.kamilsmolarek.autofix.workshop.entity;
 
+import com.kamilsmolarek.autofix.workshop.model.OpeningHours;
 import com.kamilsmolarek.autofix.workshop.model.Workshop;
 import jakarta.persistence.*;
 import lombok.*;
@@ -40,6 +41,6 @@ public class WorkshopEntity {
     @Column(name = "service_ids")
     private String serviceIds;
 
-    @Column(name = "opening_hours")
-    private String openingHours;
+    @OneToMany(mappedBy = "workshop", cascade = CascadeType.ALL)
+    private List<OpeningHoursEntity> openingHours;
 }

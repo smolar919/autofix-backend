@@ -18,5 +18,5 @@ public class Workshop {
     private boolean isVisible;
     private String description;
     private List<String> serviceIds;
-    private String openingHours;
+    private List<OpeningHours> openingHours;
 }
